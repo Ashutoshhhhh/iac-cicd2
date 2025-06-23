@@ -54,3 +54,19 @@ jobs:
           echo "Deploying to dev Environment"
           az deployment group create --resource-group $RG_NAME --template-file main.bicep --parameters @parameters/dev.json
 
+      - name: Validate App gateway deployment
+        run: |
+          az network application-gateway show --name dev-appgw --resource-group $RG_NAME --query "provisioningState" --output tsv
+      
+      - name: get public ip of app
+        id: get-ip
+        run: |
+          ip=$(az network public-ip show --name dev-app-gw-pip --resource-group $RG_NAME --query "ipAddress" --output tsv) 
+          echo "public_ip=$ip" >> $GITHUB_OUTPUT
+      - name: http health check
+        run: |
+          echo "Checking HTTP response for ${{ steps.get_ip.outputs.public_ip }}"
+          curl -I http://${{ steps.get_ip.outputs.public_ip }}
+
+
+
