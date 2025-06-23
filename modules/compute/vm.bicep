@@ -91,7 +91,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2024-07-01'= {
 }
 }
 
-resource nginxExtension 'Microsoft.Compute/virtualMachines/extensions@2024-11-01' = if (publicIpEnabled) {
+resource nginxExtension 'Microsoft.Compute/virtualMachines/extensions@2024-11-01' = if (publicIp) {
   parent: vm
   name: 'nginxExtension'
   location: location
