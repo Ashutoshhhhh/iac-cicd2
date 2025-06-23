@@ -91,24 +91,24 @@ resource vm 'Microsoft.Compute/virtualMachines@2024-07-01'= {
 }
 }
 
-resource nginxExtension 'Microsoft.Compute/virtualMachines/extensions@2024-11-01' = if (publicIp) {
-  parent: vm
-  name: 'nginxExtension'
-  location: location
-  properties: {
-    publisher: 'Microsoft.Azure.Extensions'
-    type: 'CustomScript'
-    typeHandlerVersion: '2.1'
-    autoUpgradeMinorVersion: true
-    settings: {
-      commandToExecute: '''
-        #!/bin/bash
-        sudo apt update
-        sudo apt install -y nginx
-        sudo systemctl start nginx
-        sudo systemctl enable nginx
-      '''
-    }
-  }
-}
+// resource nginxExtension 'Microsoft.Compute/virtualMachines/extensions@2024-11-01' = if (publicIp) {
+//   parent: vm
+//   name: 'nginxExtension'
+//   location: location
+//   properties: {
+//     publisher: 'Microsoft.Azure.Extensions'
+//     type: 'CustomScript'
+//     typeHandlerVersion: '2.1'
+//     autoUpgradeMinorVersion: true
+//     settings: {
+//       commandToExecute: '''
+//         #!/bin/bash
+//         sudo apt update
+//         sudo apt install -y nginx
+//         sudo systemctl start nginx
+//         sudo systemctl enable nginx
+//       '''
+//     }
+//   }
+// }
 
