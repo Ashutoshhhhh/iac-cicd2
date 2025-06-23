@@ -61,7 +61,7 @@ jobs:
       
       - name: get public ip of app
         if: always()
-        id: get-ip
+        id: get_ip
         run: |
           ip=$(az network public-ip show --name dev-app-gw-pip --resource-group $RG_NAME --query "ipAddress" --output tsv) 
           echo "public_ip=$ip" >> $GITHUB_OUTPUT
